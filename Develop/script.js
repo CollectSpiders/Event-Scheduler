@@ -11,9 +11,30 @@ $(function () {
 
   for (var i = 0; i <workDayHours.length; i++){
     var hour = workDayHours[i];
-    var timeBlock = $('<div>').attr()
-    // TODO: look at documentation for reference to complete the above...
+    var timeBlock = $('<div>').attr('id', 'hour-' + (i+9)).addClass('row time-block');
+    var hourCol = $('<div>').addClass('cal-2 col-md-1 hour test-center py-3').text(hour);
+    var descriptionCol = $('<textarea>').addClass('col-8 col-md-10 description').attr('rows', '3');
+    var saveBtn = $('<button>').addClass('btn saveBtn col-2 col-md-1').attr('aria-label', 'save');
+    var saveIcon = $('<i>').addClass('fas fa-save').attr('aria-hidden', 'true');
+
+    saveBtn.append(saveIcon);
+    timeBlock.append(hourCol, description, saveBtn);
+    $('.container').append(timeBlock);
+}
+
+var currentHour = dayjs().formate('H');
+
+$('.timeBlock').each(function (){
+  var blockHour = parseInt($(this).attr('id').split('-')[1]);
+  // compare the block hour to the current hour to apply the correct class
+  if (blockHour < currentHour){
+    $(this).addClass('past');
+  } else if (blockHour === currentHour){
+    $(this).addClass('present');
+  } else {
+    $(this).addClass('future');
   }
+});
 
 
   /*
