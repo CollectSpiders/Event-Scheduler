@@ -7,25 +7,25 @@ $(function () {
       var timeBlock = $("<div>")
           .attr("id", "hour-" + (i + 9))
           .addClass("row time-block");
-      var hourCol = $("<div>").addClass("cal-2 col-md-1 hour test-center py-3").text(hour);
-      // not sure what's wrong with this line just yet... it's supposed to be description not descriptionCol :face_exhaling:
+      var hourCol = $("<div>").addClass("col-2 col-md-1 hour text-center py-3").text(hour);
       var description = $("<textarea>").addClass("col-8 col-md-10 description").attr("rows", "3");
       var saveBtn = $("<button>").addClass("btn saveBtn col-2 col-md-1").attr("aria-label", "save");
       var saveIcon = $("<i>").addClass("fas fa-save").attr("aria-hidden", "true");
 
       saveBtn.append(saveIcon);
       timeBlock.append(hourCol, description, saveBtn);
-      $(".container").append(timeBlock);
+      $(".container-lg").append(timeBlock);
   }
 
-  var currentHour = dayjs().formate("H");
+  var currentHour = dayjs().format("H");
 
-  $(".timeBlock").each(function () {
+  $(".time-block").each(function () {
       var blockHour = parseInt($(this).attr("id").split("-")[1]);
+
       // compare the block hour to the current hour to apply the correct class
       if (blockHour < currentHour) {
           $(this).addClass("past");
-      } else if (blockHour === currentHour) {
+      } else if (blockHour == currentHour) {
           $(this).addClass("present");
       } else {
           $(this).addClass("future");
@@ -33,13 +33,13 @@ $(function () {
   });
 
   $(".saveBtn").on("click", function () {
-      var inputText = $(this).siblings("description").val();
+      var inputText = $(this).siblings(".description").val();
       var hour = $(this).parent().attr("id");
 
       //Store input text in local storage as long as it isn't empty
-      if (!inputText.trim() === "") {
+      if (inputText.trim() !== "") {
           localStorage.setItem(hour, inputText);
-          alert("Event saved");
+          alert("Event saved.");
       }
   });
 
@@ -60,6 +60,7 @@ $(function () {
 });
 
 
+
 // beneath is code before unminify link: https://unminify.com/
 /*
 $(function () {
@@ -68,59 +69,59 @@ $(function () {
   ];
 
   // loops through the workDayHours array to create a time block for each hour
-  for (var i = 0; i <workDayHours.length; i++){
+  for (var i = 0; i < workDayHours.length; i++) {
     var hour = workDayHours[i];
-    var timeBlock = $('<div>').attr('id', 'hour-' + (i+9)).addClass('row time-block');
-    var hourCol = $('<div>').addClass('cal-2 col-md-1 hour test-center py-3').text(hour);
-    // not sure what's wrong with this line just yet... it's supposed to be description not descriptionCol :face_exhaling:
+    var timeBlock = $('<div>').attr('id', 'hour-' + (i + 9)).addClass('row time-block');
+    var hourCol = $('<div>').addClass('col-2 col-md-1 hour text-center py-3').text(hour);
     var description = $('<textarea>').addClass('col-8 col-md-10 description').attr('rows', '3');
     var saveBtn = $('<button>').addClass('btn saveBtn col-2 col-md-1').attr('aria-label', 'save');
     var saveIcon = $('<i>').addClass('fas fa-save').attr('aria-hidden', 'true');
 
     saveBtn.append(saveIcon);
     timeBlock.append(hourCol, description, saveBtn);
-    $('.container').append(timeBlock);
-}
-
-var currentHour = dayjs().formate('H');
-
-$('.timeBlock').each(function (){
-  var blockHour = parseInt($(this).attr('id').split('-')[1]);
-  // compare the block hour to the current hour to apply the correct class
-  if (blockHour < currentHour){
-    $(this).addClass('past');
-  } else if (blockHour === currentHour){
-    $(this).addClass('present');
-  } else {
-    $(this).addClass('future');
+    $('.container-lg').append(timeBlock);
   }
-});
 
-$('.saveBtn').on('click', function (){
-  var inputText = $(this).siblings('description').val();
-  var hour = $(this).parent().attr('id');
+  var currentHour = dayjs().format('H');
 
-  //Store input text in local storage as long as it isn't empty
-  if (!inputText.trim() === ''){
-    localStorage.setItem(hour, inputText);
-    alert('Event saved');
-  }
-});
+  $('.time-block').each(function () {
+    var blockHour = parseInt($(this).attr('id').split('-')[1]);
 
-$('.time-block').each(function (){
-  var hour = $(this).attr('id');
-  var savedInput = localStorage.getItem(hour);
-
-  // saves user input to local storage
-  if(savedInput){
-    $(this).find('.description').val(savedInput);
-  }
-});
-
-var today = dayjs();
-
-// displays current date in the page header
-$('#currentDay').text(today.format('MMM D, YYYY'));
+      // compare the block hour to the current hour to apply the correct class
+      if (blockHour < currentHour) {
+        $(this).addClass('past');
+      } else if (blockHour == currentHour) {
+        $(this).addClass('present');
+      } else {
+        $(this).addClass('future');
+      }
+    });
+  
+    $('.saveBtn').on('click', function () {
+      var inputText = $(this).siblings('.description').val();
+      var hour = $(this).parent().attr('id');
+  
+      //Store input text in local storage as long as it isn't empty
+      if (inputText.trim() !== '') {
+        localStorage.setItem(hour, inputText);
+        alert('Event saved.');
+      }
+    });
+  
+    $('.time-block').each(function () {
+      var hour = $(this).attr('id');
+      var savedInput = localStorage.getItem(hour);
+  
+      // saves user input to local storage
+      if (savedInput) {
+        $(this).find('.description').val(savedInput);
+      }
+    });
+  
+    var today = dayjs();
+  
+  // displays current date in the page header
+  $('#currentDay').text(today.format('MMM D, YYYY'));
 });
 
 */
