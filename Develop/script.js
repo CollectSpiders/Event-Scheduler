@@ -1,19 +1,15 @@
-/*
-Wrap all code that interacts with the DOM in a call to jQuery to ensure that
-the code isn't run until the browser has finished rendering all the elements
-in the html.
-*/
-
 $(function () {
   var workDayHours = [
     '9AM', '10AM', '11AM', '12PM', '1PM', '2PM', '3PM', '4PM', '5PM'
   ];
 
+  // loops through the workDayHours array to create a time block for each hour
   for (var i = 0; i <workDayHours.length; i++){
     var hour = workDayHours[i];
     var timeBlock = $('<div>').attr('id', 'hour-' + (i+9)).addClass('row time-block');
     var hourCol = $('<div>').addClass('cal-2 col-md-1 hour test-center py-3').text(hour);
-    var descriptionCol = $('<textarea>').addClass('col-8 col-md-10 description').attr('rows', '3');
+    // not sure what's wrong with this line just yet... it's supposed to be description not descriptionCol :face_exhaling:
+    var description = $('<textarea>').addClass('col-8 col-md-10 description').attr('rows', '3');
     var saveBtn = $('<button>').addClass('btn saveBtn col-2 col-md-1').attr('aria-label', 'save');
     var saveIcon = $('<i>').addClass('fas fa-save').attr('aria-hidden', 'true');
 
