@@ -5,6 +5,17 @@ in the html.
 */
 
 $(function () {
+  var workDayHours = [
+    '9AM', '10AM', '11AM', '12PM', '1PM', '2PM', '3PM', '4PM', '5PM'
+  ];
+
+  for (var i = 0; i <workDayHours.length; i++){
+    var hour = workDayHours[i];
+    var timeBlock = $('<div>').attr()
+    // TODO: look at documentation for reference to complete the above...
+  }
+
+
   /*
   TODO: Add a listener for click events on the save button. This code should
   use the id in the containing time-block as a key to save the user input in
